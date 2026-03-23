@@ -1,26 +1,54 @@
 @import "tailwindcss";
 
+@theme {
+  /* Brand Colors */
+  --color-g: #00B87A;
+  --color-g-d: #007A50;
+  --color-g-l: #E0F7EF;
+  --color-y: #F5C400;
+  --color-y-d: #A68500;
+  --color-y-l: #FFFBE0;
+  --color-b: #0044CC;
+  --color-b-d: #002A80;
+  --color-b-l: #E8EEFF;
+  --color-r: #F04438;
+  --color-r-l: #FEF3F2;
+  --color-ink: #0A0F1E;
+  --color-ink2: #1C2540;
+  --color-ink3: #384065;
+  --color-muted: #6B7394;
+  --color-m2: #9BA3C4;
+  --color-bd: #E4E8F5;
+  --color-bd2: #CDD2EA;
+  --color-bg: #F7F8FC;
+  --color-bg2: #ECEEF7;
+  --color-wh: #FFFFFF;
+
+  /* Fonts */
+  --font-head: "Clash Display", sans-serif;
+  --font-body: "Bricolage Grotesque", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: var(--color-ink);
+  --foreground: var(--color-wh);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body);
+  line-height: 1.6;
+}
+
+/* Grain Overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: .6;
 }
