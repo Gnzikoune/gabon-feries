@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   description: "Découvrez tous les jours fériés, fêtes nationales et événements civils au Gabon. Planifiez vos congés en toute sérénité.",
 };
 
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -21,7 +24,11 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col font-body bg-ink text-wh">
+        <Header />
+        <main className="flex-1">{children}</main>
+        <Footer />
+      </body>
     </html>
   );
 }
