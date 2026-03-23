@@ -1,0 +1,1717 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roadmap SCRUM — Gabon Fériés</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Bricolage+Grotesque:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ── TOKENS ── */
+:root {
+  --g:    #00B87A;
+  --g-d:  #007A50;
+  --g-l:  #E0F7EF;
+  --y:    #F5C400;
+  --y-d:  #A68500;
+  --y-l:  #FFFBE0;
+  --b:    #0044CC;
+  --b-d:  #002A80;
+  --b-l:  #E8EEFF;
+  --r:    #F04438;
+  --r-l:  #FEF3F2;
+  --ink:  #0A0F1E;
+  --ink2: #1C2540;
+  --ink3: #384065;
+  --muted:#6B7394;
+  --m2:   #9BA3C4;
+  --bd:   #E4E8F5;
+  --bd2:  #CDD2EA;
+  --bg:   #F7F8FC;
+  --bg2:  #ECEEF7;
+  --wh:   #FFFFFF;
+  --mono: 'JetBrains Mono', monospace;
+  --head: 'Clash Display', sans-serif;
+  --body: 'Bricolage Grotesque', sans-serif;
+
+  /* sprint colors */
+  --s0: #6366F1; /* setup */
+  --s1: #0EA5E9; /* sprint 1 */
+  --s2: #00B87A; /* sprint 2 */
+  --s3: #F59E0B; /* sprint 3 */
+  --s4: #EC4899; /* sprint 4 */
+  --s5: #8B5CF6; /* sprint 5 */
+  --s6: #EF4444; /* sprint 6 */
+  --s7: #06B6D4; /* sprint 7 */
+  --s8: #F97316; /* sprint 8 */
+  --s9: #10B981; /* sprint 9 — release */
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--body);
+  background: var(--ink);
+  color: var(--wh);
+  font-size: 14px;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ── GRAIN OVERLAY ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: .6;
+}
+
+/* ── HEADER ── */
+header {
+  position: sticky;
+  top: 0;
+  background: rgba(10,15,30,.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255,255,255,.07);
+  z-index: 100;
+  padding: 0 40px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hd-left { display: flex; align-items: center; gap: 20px; }
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+.flag-mini {
+  width: 28px; height: 20px;
+  border-radius: 3px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 0 1px rgba(255,255,255,.15);
+}
+.flag-mini div { flex: 1; }
+.fg { background: var(--g); }
+.fy { background: var(--y); }
+.fb { background: var(--b); }
+.logo-name {
+  font-family: var(--head);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--wh);
+  letter-spacing: -.3px;
+}
+.logo-name em { color: var(--g); font-style: normal; }
+
+.divider-v { width: 1px; height: 20px; background: rgba(255,255,255,.12); }
+
+.hd-title {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--muted);
+  letter-spacing: .5px;
+}
+
+.hd-right { display: flex; align-items: center; gap: 12px; }
+
+.legend-pills { display: flex; gap: 6px; }
+.lpill {
+  font-family: var(--mono);
+  font-size: 10px;
+  padding: 3px 8px;
+  border-radius: 20px;
+  font-weight: 500;
+  border: 1px solid;
+  cursor: default;
+  transition: opacity .2s;
+}
+.lpill:hover { opacity: .7; }
+
+.btn-export {
+  display: flex; align-items: center; gap: 6px;
+  padding: 7px 14px;
+  background: var(--g);
+  color: var(--wh);
+  border: none;
+  border-radius: 7px;
+  font-family: var(--body);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .2s;
+}
+.btn-export:hover { background: var(--g-d); transform: translateY(-1px); }
+
+/* ── HERO ── */
+.hero {
+  padding: 64px 40px 48px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -100px; right: -100px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(0,184,122,.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -80px; left: 0;
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(245,196,0,.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--g);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  background: rgba(0,184,122,.1);
+  border: 1px solid rgba(0,184,122,.25);
+  padding: 5px 12px;
+  border-radius: 20px;
+}
+
+.hero h1 {
+  font-family: var(--head);
+  font-size: clamp(36px, 5vw, 60px);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -1px;
+  margin-bottom: 20px;
+  max-width: 700px;
+}
+.hero h1 .accent { color: var(--g); }
+.hero h1 .acc2 { color: var(--y); }
+
+.hero-sub {
+  font-size: 16px;
+  color: rgba(255,255,255,.55);
+  max-width: 560px;
+  line-height: 1.7;
+  margin-bottom: 36px;
+}
+
+/* ── SCRUM STATS ── */
+.scrum-stats {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 0;
+}
+.ss {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.ss-num {
+  font-family: var(--head);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--wh);
+  line-height: 1;
+}
+.ss-label {
+  font-size: 11px;
+  color: var(--muted);
+  font-family: var(--mono);
+  letter-spacing: .5px;
+}
+.ss-div { width: 1px; background: rgba(255,255,255,.1); align-self: stretch; margin: 4px 0; }
+
+/* ── SCRUM LEGEND ── */
+.scrum-legend {
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 16px;
+  padding: 24px 40px;
+  margin: 0 40px 40px;
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.sl-title {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+.sl-items { display: flex; gap: 20px; flex-wrap: wrap; }
+.sl-item { display: flex; align-items: center; gap: 7px; }
+.sl-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
+.sl-text { font-size: 12px; color: rgba(255,255,255,.6); }
+
+/* ── MAIN LAYOUT ── */
+.main {
+  padding: 0 40px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ── PRODUCT BACKLOG ── */
+.backlog-section {
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+.backlog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 28px;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  background: rgba(255,255,255,.02);
+  cursor: pointer;
+  user-select: none;
+}
+.backlog-header:hover { background: rgba(255,255,255,.04); }
+.bh-left { display: flex; align-items: center; gap: 12px; }
+.bh-icon {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.bh-title { font-family: var(--head); font-size: 17px; font-weight: 600; }
+.bh-sub { font-size: 12px; color: var(--muted); margin-top: 1px; }
+.bh-right { display: flex; align-items: center; gap: 10px; }
+.bh-count {
+  font-family: var(--mono);
+  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: rgba(255,255,255,.08);
+  color: var(--m2);
+}
+.bh-chevron {
+  font-size: 12px;
+  color: var(--muted);
+  transition: transform .3s;
+}
+.bh-chevron.open { transform: rotate(90deg); }
+.backlog-body { padding: 20px 28px 28px; display: none; }
+.backlog-body.open { display: block; }
+
+/* ── EPIC LABEL ── */
+.epic-label {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  font-weight: 500;
+  padding: 2px 7px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: .8px;
+}
+
+/* ── SPRINT CARD ── */
+.sprint-card {
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.07);
+  background: rgba(255,255,255,.02);
+  transition: all .25s;
+}
+.sprint-card:hover {
+  border-color: rgba(255,255,255,.12);
+  background: rgba(255,255,255,.03);
+}
+
+.sprint-header {
+  display: grid;
+  grid-template-columns: 260px 1fr auto;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 28px;
+  cursor: pointer;
+  user-select: none;
+  border-left: 3px solid;
+  transition: background .2s;
+}
+.sprint-header:hover { background: rgba(255,255,255,.03); }
+
+.sh-meta { display: flex; flex-direction: column; gap: 6px; }
+.sh-sprint-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  opacity: .7;
+}
+.sh-sprint-name { font-family: var(--head); font-size: 17px; font-weight: 600; }
+.sh-dates {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+}
+.sh-dates-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--muted); }
+
+.sh-goal {
+  font-size: 13px;
+  color: rgba(255,255,255,.65);
+  line-height: 1.5;
+  padding: 12px 16px;
+  background: rgba(255,255,255,.04);
+  border-radius: 10px;
+  border-left: 2px solid;
+  border-left-color: inherit;
+}
+
+.sh-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+.sh-pts {
+  font-family: var(--head);
+  font-size: 22px;
+  font-weight: 700;
+}
+.sh-pts-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--muted);
+  text-align: right;
+}
+.sh-status {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+  letter-spacing: .5px;
+}
+.status-done   { background: rgba(0,184,122,.15); color: var(--g); border: 1px solid rgba(0,184,122,.3); }
+.status-active { background: rgba(245,196,0,.15); color: var(--y); border: 1px solid rgba(245,196,0,.3); }
+.status-next   { background: rgba(255,255,255,.06); color: var(--m2); border: 1px solid rgba(255,255,255,.1); }
+
+/* ── SPRINT BODY ── */
+.sprint-body {
+  border-top: 1px solid rgba(255,255,255,.05);
+  display: none;
+}
+.sprint-body.open { display: block; }
+
+.sprint-body-inner { padding: 24px 28px; }
+
+/* ── STORIES GRID ── */
+.stories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.story-card {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 12px;
+  padding: 16px;
+  transition: all .2s;
+  position: relative;
+  overflow: hidden;
+}
+.story-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+}
+.story-card:hover {
+  background: rgba(255,255,255,.07);
+  border-color: rgba(255,255,255,.12);
+  transform: translateY(-1px);
+}
+
+.sc-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.sc-id {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--muted);
+  font-weight: 500;
+}
+.sc-points {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: rgba(255,255,255,.08);
+}
+
+.sc-title {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--wh);
+  margin-bottom: 6px;
+  line-height: 1.4;
+}
+.sc-desc {
+  font-size: 12px;
+  color: rgba(255,255,255,.45);
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+.sc-footer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.sc-tag {
+  font-size: 10px;
+  padding: 2px 7px;
+  border-radius: 5px;
+  font-weight: 500;
+  font-family: var(--mono);
+  border: 1px solid rgba(255,255,255,.1);
+  color: rgba(255,255,255,.5);
+  background: rgba(255,255,255,.05);
+}
+.sc-prio {
+  margin-left: auto;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 4px;
+  font-family: var(--mono);
+  letter-spacing: .5px;
+  text-transform: uppercase;
+}
+.prio-critical { background: rgba(240,68,56,.2); color: #FCA5A5; border: 1px solid rgba(240,68,56,.3); }
+.prio-high     { background: rgba(245,158,11,.2); color: #FCD34D; border: 1px solid rgba(245,158,11,.3); }
+.prio-medium   { background: rgba(14,165,233,.2); color: #7DD3FC; border: 1px solid rgba(14,165,233,.3); }
+.prio-low      { background: rgba(107,114,148,.2); color: #94A3B8; border: 1px solid rgba(107,114,148,.3); }
+
+/* ── DEFINITION OF DONE ── */
+.dod-box {
+  background: rgba(0,184,122,.06);
+  border: 1px solid rgba(0,184,122,.15);
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-top: 16px;
+}
+.dod-title {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--g);
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.dod-items {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.dod-item {
+  font-size: 11.5px;
+  color: rgba(255,255,255,.6);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.dod-item::before { content: '✓'; color: var(--g); font-weight: 700; font-size: 10px; }
+
+/* ── CEREMONIES TABLE ── */
+.ceremonies-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin: 20px 40px;
+}
+.cer-card {
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 14px;
+  padding: 18px;
+}
+.cer-icon { font-size: 22px; margin-bottom: 8px; }
+.cer-name { font-family: var(--head); font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+.cer-duration {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--g);
+  margin-bottom: 6px;
+}
+.cer-desc { font-size: 12px; color: rgba(255,255,255,.45); line-height: 1.5; }
+
+/* ── VELOCITY CHART ── */
+.velocity-section {
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 20px;
+  padding: 28px;
+  margin: 0 0 12px;
+}
+.vs-title {
+  font-family: var(--head);
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.vs-sub { font-size: 12px; color: var(--muted); margin-bottom: 24px; }
+.velocity-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  height: 120px;
+}
+.vc-bar-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  height: 100%;
+  justify-content: flex-end;
+}
+.vc-pts {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: rgba(255,255,255,.5);
+}
+.vc-bar {
+  width: 100%;
+  border-radius: 6px 6px 0 0;
+  transition: height .6s cubic-bezier(.22,1,.36,1);
+  position: relative;
+  overflow: hidden;
+}
+.vc-bar::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 30%;
+  background: rgba(255,255,255,.1);
+}
+.vc-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--muted);
+  text-align: center;
+}
+.vc-axis {
+  border-top: 1px solid rgba(255,255,255,.08);
+  padding-top: 8px;
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+/* ── TIMELINE RIBBON ── */
+.timeline-ribbon {
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 20px;
+  padding: 28px;
+  margin-bottom: 12px;
+  overflow-x: auto;
+}
+.tr-title {
+  font-family: var(--head);
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.tr-sub { font-size: 12px; color: var(--muted); margin-bottom: 24px; }
+.tr-inner {
+  display: grid;
+  grid-template-rows: auto auto;
+  gap: 8px;
+  min-width: 900px;
+}
+.tr-weeks {
+  display: grid;
+  grid-template-columns: repeat(18, 1fr);
+  gap: 3px;
+}
+.tw {
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--muted);
+  padding: 4px 0;
+}
+.tr-sprints {
+  display: grid;
+  grid-template-columns: repeat(18, 1fr);
+  gap: 3px;
+}
+.ts {
+  border-radius: 6px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 600;
+  color: rgba(255,255,255,.85);
+  letter-spacing: .5px;
+  position: relative;
+  overflow: hidden;
+  cursor: default;
+  transition: transform .15s;
+}
+.ts:hover { transform: scaleY(1.1); z-index: 1; }
+.ts::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 40%;
+  background: rgba(255,255,255,.12);
+}
+.tr-epics {
+  display: grid;
+  grid-template-columns: repeat(18, 1fr);
+  gap: 3px;
+  margin-top: 4px;
+}
+.te {
+  height: 20px;
+  border-radius: 4px;
+  background: rgba(255,255,255,.05);
+  border: 1px dashed rgba(255,255,255,.1);
+}
+.te.filled {
+  background: currentColor;
+  opacity: .15;
+  border: none;
+}
+
+/* ── BURNDOWN ── */
+.burndown {
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 20px;
+  padding: 28px;
+  margin-bottom: 12px;
+}
+.bd-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-top: 20px;
+}
+.bd-side-title {
+  font-family: var(--head);
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.bd-svg { width: 100%; height: 140px; }
+
+/* ── ROLES ── */
+.roles-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 20px 40px;
+}
+.role-card {
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 16px;
+  padding: 22px;
+  border-top: 3px solid;
+}
+.rc-avatar { font-size: 32px; margin-bottom: 12px; }
+.rc-role { font-family: var(--mono); font-size: 10px; font-weight: 500; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
+.rc-name { font-family: var(--head); font-size: 16px; font-weight: 600; margin-bottom: 10px; }
+.rc-resps { list-style: none; }
+.rc-resps li {
+  font-size: 12px;
+  color: rgba(255,255,255,.55);
+  padding: 3px 0;
+  display: flex; align-items: flex-start; gap: 7px;
+}
+.rc-resps li::before { content: '→'; color: var(--g); flex-shrink: 0; margin-top: 1px; }
+
+/* ── SECTION HEADER ── */
+.section-hd {
+  font-family: var(--head);
+  font-size: 22px;
+  font-weight: 700;
+  padding: 36px 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-hd-icon {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+/* ── PROGRESS OVERVIEW ── */
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.ov-card {
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 16px;
+  padding: 18px;
+  text-align: center;
+  transition: all .2s;
+}
+.ov-card:hover { background: rgba(255,255,255,.05); transform: translateY(-2px); }
+.ov-num {
+  font-family: var(--head);
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.ov-label { font-family: var(--mono); font-size: 10px; color: var(--muted); letter-spacing: .5px; }
+.ov-bar-wrap { margin-top: 10px; height: 3px; background: rgba(255,255,255,.08); border-radius: 3px; }
+.ov-bar { height: 100%; border-radius: 3px; }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+.fade { animation: fadeIn .5s ease both; }
+.fade-2 { animation: fadeIn .5s .1s ease both; }
+.fade-3 { animation: fadeIn .5s .2s ease both; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .ceremonies-grid { grid-template-columns: repeat(2, 1fr); }
+  .roles-grid { grid-template-columns: 1fr 1fr; }
+  .sprint-header { grid-template-columns: 1fr auto; }
+  .sh-goal { display: none; }
+  .overview-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 768px) {
+  header { padding: 0 16px; }
+  .hero, .main { padding-left: 16px; padding-right: 16px; }
+  .ceremonies-grid, .scrum-legend, .roles-grid { margin-left: 0; margin-right: 0; padding-left: 16px; padding-right: 16px; }
+  .overview-grid { grid-template-columns: repeat(2, 1fr); }
+  .bd-grid { grid-template-columns: 1fr; }
+  .legend-pills, .btn-export { display: none; }
+}
+
+/* ── TOOLTIP ── */
+[data-tip] { position: relative; cursor: help; }
+[data-tip]:hover::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--ink2);
+  color: rgba(255,255,255,.85);
+  font-size: 11px;
+  white-space: nowrap;
+  padding: 5px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,.1);
+  z-index: 200;
+  font-family: var(--mono);
+  pointer-events: none;
+}
+</style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header>
+  <div class="hd-left">
+    <a href="#" class="logo">
+      <div class="flag-mini"><div class="fg"></div><div class="fy"></div><div class="fb"></div></div>
+      <span class="logo-name">Gabon<em>Fériés</em></span>
+    </a>
+    <div class="divider-v"></div>
+    <span class="hd-title">SCRUM ROADMAP · v1.0</span>
+  </div>
+  <div class="hd-right">
+    <div class="legend-pills">
+      <span class="lpill" style="color:var(--g);border-color:rgba(0,184,122,.3);background:rgba(0,184,122,.1)">✓ Terminé</span>
+      <span class="lpill" style="color:var(--y);border-color:rgba(245,196,0,.3);background:rgba(245,196,0,.1)">⚡ Actif</span>
+      <span class="lpill" style="color:var(--m2);border-color:rgba(255,255,255,.1);background:rgba(255,255,255,.05)">○ Planifié</span>
+    </div>
+    <button class="btn-export" onclick="window.print()">⬇ Exporter</button>
+  </div>
+</header>
+
+<!-- ── HERO ── -->
+<section class="hero fade">
+  <div class="hero-eyebrow">🇬🇦 Méthodologie Agile SCRUM</div>
+  <h1>Roadmap<br><span class="accent">Sprint par</span> <span class="acc2">Sprint</span></h1>
+  <p class="hero-sub">9 sprints de 2 semaines · 18 semaines au total · Du setup initial au lancement en production. Chaque User Story estimée en Story Points (suite de Fibonacci).</p>
+  <div class="scrum-stats">
+    <div class="ss">
+      <span class="ss-num">9</span>
+      <span class="ss-label">Sprints</span>
+    </div>
+    <div class="ss-div"></div>
+    <div class="ss">
+      <span class="ss-num">18</span>
+      <span class="ss-label">Semaines</span>
+    </div>
+    <div class="ss-div"></div>
+    <div class="ss">
+      <span class="ss-num">284</span>
+      <span class="ss-label">Story Points</span>
+    </div>
+    <div class="ss-div"></div>
+    <div class="ss">
+      <span class="ss-num">58</span>
+      <span class="ss-label">User Stories</span>
+    </div>
+    <div class="ss-div"></div>
+    <div class="ss">
+      <span class="ss-num">2</span>
+      <span class="ss-label">Sem / Sprint</span>
+    </div>
+    <div class="ss-div"></div>
+    <div class="ss">
+      <span class="ss-num">~32</span>
+      <span class="ss-label">SP vélocité cible</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── OVERVIEW CARDS ── -->
+<div class="main">
+<div class="overview-grid fade-2">
+  <div class="ov-card">
+    <div class="ov-num" style="color:var(--s0)">1</div>
+    <div class="ov-label">SETUP</div>
+    <div class="ov-bar-wrap"><div class="ov-bar" style="background:var(--s0);width:100%"></div></div>
+  </div>
+  <div class="ov-card">
+    <div class="ov-num" style="color:var(--s1)">S1–S2</div>
+    <div class="ov-label">FONDATIONS</div>
+    <div class="ov-bar-wrap"><div class="ov-bar" style="background:var(--s1);width:60%"></div></div>
+  </div>
+  <div class="ov-card">
+    <div class="ov-num" style="color:var(--s4)">S3–S5</div>
+    <div class="ov-label">COMMUNAUTÉ</div>
+    <div class="ov-bar-wrap"><div class="ov-bar" style="background:var(--s4);width:30%"></div></div>
+  </div>
+  <div class="ov-card">
+    <div class="ov-num" style="color:var(--s6)">S6–S7</div>
+    <div class="ov-label">GAMIFICATION</div>
+    <div class="ov-bar-wrap"><div class="ov-bar" style="background:var(--s6);width:10%"></div></div>
+  </div>
+  <div class="ov-card">
+    <div class="ov-num" style="color:var(--s9)">S8–S9</div>
+    <div class="ov-label">LANCEMENT</div>
+    <div class="ov-bar-wrap"><div class="ov-bar" style="background:var(--s9);width:5%"></div></div>
+  </div>
+</div>
+
+<!-- ── TIMELINE RIBBON ── -->
+<div class="timeline-ribbon fade-3">
+  <div class="tr-title">Vue Macro — 18 semaines</div>
+  <div class="tr-sub">Chaque colonne = 1 semaine · Cliquez sur un sprint pour le détailler ci-dessous</div>
+  <div class="tr-inner">
+    <div class="tr-weeks">
+      <div class="tw">S1</div><div class="tw">S2</div><div class="tw">S3</div><div class="tw">S4</div>
+      <div class="tw">S5</div><div class="tw">S6</div><div class="tw">S7</div><div class="tw">S8</div>
+      <div class="tw">S9</div><div class="tw">S10</div><div class="tw">S11</div><div class="tw">S12</div>
+      <div class="tw">S13</div><div class="tw">S14</div><div class="tw">S15</div><div class="tw">S16</div>
+      <div class="tw">S17</div><div class="tw">S18</div>
+    </div>
+    <div class="tr-sprints">
+      <!-- Sprint 0 : 1 sem -->
+      <div class="ts" style="background:var(--s0);grid-column:span 1" data-tip="Sprint 0 — Setup">SP0</div>
+      <!-- Sprint 1 : 2 sem -->
+      <div class="ts" style="background:var(--s1);grid-column:span 2" data-tip="Sprint 1 — BDD & Auth">SPRINT 1</div>
+      <!-- Sprint 2 : 2 sem -->
+      <div class="ts" style="background:var(--s2);grid-column:span 2" data-tip="Sprint 2 — Calendrier Public">SPRINT 2</div>
+      <!-- Sprint 3 : 2 sem -->
+      <div class="ts" style="background:var(--s3);grid-column:span 2" data-tip="Sprint 3 — Fiches & Export">SPRINT 3</div>
+      <!-- Sprint 4 : 2 sem -->
+      <div class="ts" style="background:var(--s4);grid-column:span 2" data-tip="Sprint 4 — Soumissions">SPRINT 4</div>
+      <!-- Sprint 5 : 2 sem -->
+      <div class="ts" style="background:var(--s5);grid-column:span 2" data-tip="Sprint 5 — Admin & Notifs">SPRINT 5</div>
+      <!-- Sprint 6 : 2 sem -->
+      <div class="ts" style="background:var(--s6);grid-column:span 2" data-tip="Sprint 6 — Gamification">SPRINT 6</div>
+      <!-- Sprint 7 : 2 sem -->
+      <div class="ts" style="background:var(--s7);grid-column:span 1" data-tip="Sprint 7 — Quiz & Badges">SP7</div>
+      <!-- Sprint 8 : 1 sem -->
+      <div class="ts" style="background:var(--s8);grid-column:span 1" data-tip="Sprint 8 — Growth & SEO">SP8</div>
+      <!-- Sprint 9 : 1 sem -->
+      <div class="ts" style="background:var(--s9);grid-column:span 1" data-tip="Sprint 9 — Release 🚀">🚀</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ -->
+<!-- PRODUCT BACKLOG (EPICS)        -->
+<!-- ══════════════════════════════ -->
+<div class="section-hd">
+  <div class="section-hd-icon" style="background:rgba(99,102,241,.15)">📋</div>
+  Product Backlog — Épics
+</div>
+
+<!-- ÉPIC 1 -->
+<div class="backlog-section">
+  <div class="backlog-header" onclick="toggleBacklog(this)">
+    <div class="bh-left">
+      <div class="bh-icon" style="background:rgba(14,165,233,.15)">🏗️</div>
+      <div>
+        <div class="bh-title">Épic 1 — Fondations Techniques</div>
+        <div class="bh-sub">Setup, BDD, Authentification, Design System</div>
+      </div>
+    </div>
+    <div class="bh-right">
+      <span class="bh-count">6 stories · 52 SP</span>
+      <span class="bh-chevron">▶</span>
+    </div>
+  </div>
+  <div class="backlog-body">
+    <div class="stories-grid">
+      <div class="story-card" style="--c:var(--s0)"><div class="story-card" style="display:contents"><div class="sc-top"><span class="sc-id">US-001</span><span class="sc-points" style="color:var(--s0)">3 SP</span></div><div class="sc-title">Setup repository & CI/CD</div><div class="sc-desc">En tant que dev, je veux un repo GitHub configuré avec GitHub Actions, lint, tests et deploy preview Vercel.</div><div class="sc-footer"><span class="sc-tag">DevOps</span><span class="sc-tag">Setup</span><span class="sc-prio prio-critical">Critique</span></div></div></div>
+      <div class="story-card"><div class="sc-top"><span class="sc-id">US-002</span><span class="sc-points" style="color:var(--s1)">8 SP</span></div><div class="sc-title">Initialisation schéma Supabase</div><div class="sc-desc">En tant que dev, je veux toutes les tables PostgreSQL créées avec RLS, triggers et données initiales (jours fériés, badges).</div><div class="sc-footer"><span class="sc-tag">BDD</span><span class="sc-tag">Supabase</span><span class="sc-prio prio-critical">Critique</span></div></div>
+      <div class="story-card"><div class="sc-top"><span class="sc-id">US-003</span><span class="sc-points" style="color:var(--s1)">8 SP</span></div><div class="sc-title">Authentification Email + Google OAuth</div><div class="sc-desc">En tant qu'utilisateur, je veux m'inscrire / me connecter via email ou Google en moins de 30 secondes.</div><div class="sc-footer"><span class="sc-tag">Auth</span><span class="sc-tag">OAuth</span><span class="sc-prio prio-critical">Critique</span></div></div>
+      <div class="story-card"><div class="sc-top"><span class="sc-id">US-004</span><span class="sc-points" style="color:var(--s1)">5 SP</span></div><div class="sc-title">Design System & composants de base</div><div class="sc-desc">En tant que dev, je veux un design system Tailwind documenté (couleurs Gabon, typographies, boutons, cards, modales).</div><div class="sc-footer"><span class="sc-tag">UI</span><span class="sc-tag">Design</span><span class="sc-prio prio-high">Haute</span></div></div>
+      <div class="story-card"><div class="sc-top"><span class="sc-id">US-005</span><span class="sc-points" style="color:var(--s1)">13 SP</span></div><div class="sc-title">Profil utilisateur complet</div><div class="sc-desc">En tant qu'utilisateur, je veux créer et modifier mon profil (pseudo, province, avatar) depuis mon dashboard personnel.</div><div class="sc-footer"><span class="sc-tag">Profil</span><span class="sc-tag">Dashboard</span><span class="sc-prio prio-high">Haute</span></div></div>
+      <div class="story-card"><div class="sc-top"><span class="sc-id">US-006</span><span class="sc-points" style="color:var(--s1)">5 SP</span></div><div class="sc-title">PWA & manifest</div><div class="sc-desc">En tant qu'utilisateur mobile, je veux installer l'app sur mon écran d'accueil et l'utiliser hors-ligne pour consulter les dates.</div><div class="sc-footer"><span class="sc-tag">PWA</span><span class="sc-tag">Mobile</span><span class="sc-prio prio-medium">Moyenne</span></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ÉPIC 2 -->
+<div class="backlog-section">
+  <div class="backlog-header" onclick="toggleBacklog(this)">
+    <div class="bh-left">
+      <div class="bh-icon" style="background:rgba(0,184,122,.15)">📅</div>
+      <div>
+        <div class="bh-title">Épic 2 — Calendrier Public</div>
+        <div class="bh-sub">Affichage, fiches culturelles, export iCal</div>
+      </div>
+    </div>
+    <div class="bh-right">
+      <span class="bh-count">8 stories · 60 SP</span>
+      <span class="bh-chevron">▶</span>
+    </div>
+  </div>
+  <div class="backlog-body">
+    <div class="stories-grid">
+      <div class="story-card"><div class="sc-top"><span class="sc-id">US-007</span><span class="sc-points" style="color:var(--s2)">13 SP</span></div><div class="sc-title">Vue calendrier mensuelle & annuelle</div><div class="sc-desc">En tant qu'utilisateur, je veux voir tous les jours fériés de l'année sur un calendrier interactif avec code couleur par catégorie.</div><div class="sc-footer"><span class="sc-tag">Calendrier</span><span class="sc-tag">UI</span><span class="sc-prio prio-critical">Critique</span></div></div>
+      <div class="story-card"><div class="sc-top"><span class="sc-id">US-008</span><span class="sc-points" style="color:var(--s2)">8 SP</span></div><div class="sc-title">Fiche détaillée par jour férié</div><div class="sc-desc">En tant qu'utilisateur, je veux ouvrir la fiche d'un jour férié et y trouver l'histoire officielle, les traditions et une galerie photo.</div><div class="sc-footer"><span class="sc-tag">Fiches</span><span class="sc-tag">Culture</span><span class="sc-prio prio-critical">Critique</span></div></div>
+      <div class="story-card"><div class="sc-top"><span class="sc-id">US-009</span><span class="sc-points" style="color:var(--s2)">5 SP</span></div><div class="sc-title">Cases Mystère (unlock le jour J)</div><div class="sc-desc">En tant qu'utilisateur, je veux que les cases soient verrouillées et se débloquent avec animation le jour de la fête.</div><div class="sc-footer"><span class="sc-tag">Gamification</span><span class="sc-tag">UX</span><span class="sc-prio prio-high">Haute</span></div></div>
+      <div class="story-card"><div class="sc-top"><span class="sc-id">US-010</span><span class="sc-points" style="color:var(--s2)">8 SP</span></div><div class="sc-title">Feux d'artifice virtuels (fêtes nationales)</div><div class="sc-desc">En tant qu'utilisateur, je veux voir des feux d'artifice animés sur l'écran lors des fêtes nationales (16–17 août, 30 août).</div><div class="sc-footer"><span class="sc-tag">Animation</span><span class="sc-tag">Fêtes</span><span class="sc-prio prio-medium">Moyenne</span></div></div>
+      <div class="story-card"><div class="sc-top"><span class="sc-id">US-011</span><span class="sc-points" style="color:var(--s3)">8 SP</span></div><div class="sc-title">Export iCal / Google Calendar</div><div class="sc-desc">En tant qu'utilisateur, je veux ajouter tous les jours fériés en un clic à mon calendrier personnel (Google, Apple, Outlook).</div><div class="sc-footer"><span class="sc-tag">Export</span><span class="sc-tag">iCal</span><span class="sc-prio prio-high">Haute</span></div></div>
+      <div class="story-card"><div class="sc-top"><span class="sc-id">US-012</span><span class="sc-points" style="color:var(--s3)">5 SP</span></div><div class="sc-title">Widget compte à rebours partageable</div><div class="sc-desc">En tant qu'utilisateur, je veux partager un widget « X jours avant le prochain pont » sur mes réseaux sociaux.</div><div class="sc-footer"><span class="sc-tag">Viral</span><span class="sc-tag">Widget</span><span class="sc-prio prio-medium">Moyenne</span></div></div>
+      <div class="story-card"><div class="sc-top"><span class="sc-id">US-013</span><span class="sc-points" style="color:var(--s3)">8 SP</span></div><div class="sc-title">Calcul automatique fêtes mobiles</div><div class="sc-desc">En tant qu'admin, je veux que les fêtes chrétiennes mobiles (Pâques, Ascension, Pentecôte) soient calculées automatiquement chaque année.</div><div class="sc-footer"><span class="sc-tag">BDD</span><span class="sc-tag">Algo</span><span class="sc-prio prio-high">Haute</span></div></div>
+      <div class="story-card"><div class="sc-top"><span class="sc-id">US-014</span><span class="sc-points" style="color:var(--s3)">5 SP</span></div><div class="sc-title">Détection et alerte « Pont »</div><div class="sc-desc">En tant qu'utilisateur, je veux être alerté automatiquement quand un jour férié crée un pont (mardi ou jeudi).</div><div class="sc-footer"><span class="sc-tag">Ponts</span><span class="sc-tag">Logique</span><span class="sc-prio prio-high">Haute</span></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ÉPIC 3 -->
+<div class="backlog-section">
+  <div class="backlog-header" onclick="toggleBacklog(this)">
+    <div class="bh-left">
+      <div class="bh-icon" style="background:rgba(236,72,153,.15)">✍️</div>
+      <div>
+        <div class="bh-title">Épic 3 — Soumission Citoyenne</div>
+        <div class="bh-sub">Formulaire, workflow validation, notifications</div>
+      </div>
+    </div>
+    <div class="bh-right">
+      <span class="bh-count">7 stories · 53 SP</span>
+      <span class="bh-chevron">▶</span>
+    </div>
+  </div>
+  <div class="backlog-body">
+    <div class="stories-grid">
+      <div class="story-card"><div class="sc-top"><span class="sc-id">US-015</span><span class="sc-points" style="color:var(--s4)">8 SP</span></div><div class="sc-title">Formulaire de soumission</div><div class="sc-desc">En tant qu'utilisateur authentifié, je veux soumettre une nouvelle date avec son nom, sa date, sa catégorie et une URL source officielle obligatoire.</div><div class="sc-footer"><span class="sc-tag">Form</span><span class="sc-tag">Validation</span><span class="sc-prio prio-critical">Critique</span></div></div>
+      <div class="story-card"><div class="sc-top"><span class="sc-id">US-016</span><span class="sc-points" style="color:var(--s4)">5 SP</span></div><div class="sc-title">Rate limiting anti-spam</div><div class="sc-desc">En tant que système, je veux limiter à 5 soumissions par utilisateur par 24h via un trigger PostgreSQL.</div><div class="sc-footer"><span class="sc-tag">Sécurité</span><span class="sc-tag">Trigger</span><span class="sc-prio prio-high">Haute</span></div></div>
+      <div class="story-card"><div class="sc-top"><span class="sc-id">US-017</span><span class="sc-points" style="color:var(--s4)">8 SP</span></div><div class="sc-title">File de validation Admin (Realtime)</div><div class="sc-desc">En tant qu'admin, je veux voir en temps réel les nouvelles soumissions et recevoir une notification push immédiate.</div><div class="sc-footer"><span class="sc-tag">Admin</span><span class="sc-tag">Realtime</span><span class="sc-prio prio-critical">Critique</span></div></div>
+      <div class="story-card"><div class="sc-top"><span class="sc-id">US-018</span><span class="sc-points" style="color:var(--s4)">8 SP</span></div><div class="sc-title">Approbation / Rejet avec commentaire</div><div class="sc-desc">En tant qu'admin/modérateur, je veux approuver ou rejeter une soumission avec un commentaire, déclenchant la mise à jour du calendrier.</div><div class="sc-footer"><span class="sc-tag">Admin</span><span class="sc-tag">Workflow</span><span class="sc-prio prio-critical">Critique</span></div></div>
+      <div class="story-card"><div class="sc-top"><span class="sc-id">US-019</span><span class="sc-points" style="color:var(--s5)">8 SP</span></div><div class="sc-title">Notification email utilisateur (statut)</div><div class="sc-desc">En tant qu'utilisateur, je veux recevoir un email automatique quand ma soumission est approuvée ou rejetée, avec la raison.</div><div class="sc-footer"><span class="sc-tag">Email</span><span class="sc-tag">Resend</span><span class="sc-prio prio-high">Haute</span></div></div>
+      <div class="story-card"><div class="sc-top"><span class="sc-id">US-020</span><span class="sc-points" style="color:var(--s5)">8 SP</span></div><div class="sc-title">Historique des soumissions utilisateur</div><div class="sc-desc">En tant qu'utilisateur, je veux voir toutes mes soumissions passées avec leurs statuts depuis mon dashboard.</div><div class="sc-footer"><span class="sc-tag">Dashboard</span><span class="sc-tag">Historique</span><span class="sc-prio prio-medium">Moyenne</span></div></div>
+      <div class="story-card"><div class="sc-top"><span class="sc-id">US-021</span><span class="sc-points" style="color:var(--s5)">8 SP</span></div><div class="sc-title">Validation URL source côté serveur</div><div class="sc-desc">En tant que système, je veux vérifier via une Edge Function que l'URL fournie est accessible et retourne un code 200.</div><div class="sc-footer"><span class="sc-tag">Edge Fn</span><span class="sc-tag">Sécurité</span><span class="sc-prio prio-high">Haute</span></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ÉPIC 4 -->
+<div class="backlog-section">
+  <div class="backlog-header" onclick="toggleBacklog(this)">
+    <div class="bh-left">
+      <div class="bh-icon" style="background:rgba(239,68,68,.15)">🎮</div>
+      <div>
+        <div class="bh-title">Épic 4 — Gamification</div>
+        <div class="bh-sub">Badges, points, quiz, leaderboard, barre patriotisme</div>
+      </div>
+    </div>
+    <div class="bh-right">
+      <span class="bh-count">10 stories · 64 SP</span>
+      <span class="bh-chevron">▶</span>
+    </div>
+  </div>
+  <div class="backlog-body">
+    <div class="stories-grid">
+      <div class="story-card"><div class="sc-top"><span class="sc-id">US-022</span><span class="sc-points" style="color:var(--s6)">8 SP</span></div><div class="sc-title">Système de points & transactions</div><div class="sc-desc">En tant qu'utilisateur, je veux que mes actions (lecture, quiz, badge) me créditent des points automatiquement via trigger PostgreSQL.</div><div class="sc-footer"><span class="sc-tag">Points</span><span class="sc-tag">Trigger</span><span class="sc-prio prio-critical">Critique</span></div></div>
+      <div class="story-card"><div class="sc-top"><span class="sc-id">US-023</span><span class="sc-points" style="color:var(--s6)">5 SP</span></div><div class="sc-title">Barre de Patriotisme</div><div class="sc-desc">En tant qu'utilisateur, je veux voir ma jauge de patriotisme se remplir à chaque fiche lue, avec animation CSS fluide.</div><div class="sc-footer"><span class="sc-tag">UI</span><span class="sc-tag">Animation</span><span class="sc-prio prio-high">Haute</span></div></div>
+      <div class="story-card"><div class="sc-top"><span class="sc-id">US-024</span><span class="sc-points" style="color:var(--s6)">8 SP</span></div><div class="sc-title">Quiz interactifs par jour férié</div><div class="sc-desc">En tant qu'utilisateur, je veux répondre à 3 questions (QCM/V-F) sur un jour férié et voir mon score avec explications pédagogiques.</div><div class="sc-footer"><span class="sc-tag">Quiz</span><span class="sc-tag">Score</span><span class="sc-prio prio-critical">Critique</span></div></div>
+      <div class="story-card"><div class="sc-top"><span class="sc-id">US-025</span><span class="sc-points" style="color:var(--s7)">5 SP</span></div><div class="sc-title">Débloquage automatique de badges</div><div class="sc-desc">En tant qu'utilisateur, je veux que mes badges se débloquent automatiquement via trigger dès que je remplis les conditions.</div><div class="sc-footer"><span class="sc-tag">Badges</span><span class="sc-tag">Trigger</span><span class="sc-prio prio-critical">Critique</span></div></div>
+      <div class="story-card"><div class="sc-top"><span class="sc-id">US-026</span><span class="sc-points" style="color:var(--s7)">8 SP</span></div><div class="sc-title">Galerie de badges sur le profil</div><div class="sc-desc">En tant qu'utilisateur, je veux voir mes badges obtenus et ceux encore verrouillés sur ma page profil publique.</div><div class="sc-footer"><span class="sc-tag">Profil</span><span class="sc-tag">UI</span><span class="sc-prio prio-high">Haute</span></div></div>
+      <div class="story-card"><div class="sc-top"><span class="sc-id">US-027</span><span class="sc-points" style="color:var(--s7)">8 SP</span></div><div class="sc-title">Classement mensuel (Leaderboard)</div><div class="sc-desc">En tant qu'utilisateur, je veux voir le top des utilisateurs du mois et partager mon classement sur WhatsApp avec un message personnalisé.</div><div class="sc-footer"><span class="sc-tag">Leaderboard</span><span class="sc-tag">Social</span><span class="sc-prio prio-high">Haute</span></div></div>
+      <div class="story-card"><div class="sc-top"><span class="sc-id">US-028</span><span class="sc-points" style="color:var(--s7)">5 SP</span></div><div class="sc-title">Série de connexion mensuelle (streak)</div><div class="sc-desc">En tant qu'utilisateur, je veux voir ma série de mois consécutifs consultés et recevoir un bonus si je maintiens 3 mois.</div><div class="sc-footer"><span class="sc-tag">Streak</span><span class="sc-tag">Rétention</span><span class="sc-prio prio-medium">Moyenne</span></div></div>
+      <div class="story-card"><div class="sc-top"><span class="sc-id">US-029</span><span class="sc-points" style="color:var(--s7)">3 SP</span></div><div class="sc-title">Avatar personnalisable (débloqué par points)</div><div class="sc-desc">En tant qu'utilisateur, je veux débloquer des avatars supplémentaires en accumulant des points et les afficher sur mon profil.</div><div class="sc-footer"><span class="sc-tag">Avatar</span><span class="sc-tag">Cosmétique</span><span class="sc-prio prio-low">Basse</span></div></div>
+      <div class="story-card"><div class="sc-top"><span class="sc-id">US-030</span><span class="sc-points" style="color:var(--s7)">5 SP</span></div><div class="sc-title">Banque de questions (Admin)</div><div class="sc-desc">En tant qu'admin, je veux créer, modifier et supprimer des questions de quiz avec types QCM/V-F/Glisser-Déposer depuis le CMS.</div><div class="sc-footer"><span class="sc-tag">Admin</span><span class="sc-tag">CMS</span><span class="sc-prio prio-high">Haute</span></div></div>
+      <div class="story-card"><div class="sc-top"><span class="sc-id">US-031</span><span class="sc-points" style="color:var(--s7)">5 SP</span></div><div class="sc-title">Gestion badges (Admin)</div><div class="sc-desc">En tant qu'admin, je veux créer de nouveaux badges, définir leurs conditions de débloquage et uploader leurs icônes.</div><div class="sc-footer"><span class="sc-tag">Admin</span><span class="sc-tag">Badges</span><span class="sc-prio prio-medium">Moyenne</span></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ÉPIC 5 -->
+<div class="backlog-section">
+  <div class="backlog-header" onclick="toggleBacklog(this)">
+    <div class="bh-left">
+      <div class="bh-icon" style="background:rgba(6,182,212,.15)">🔔</div>
+      <div>
+        <div class="bh-title">Épic 5 — Notifications & Administration</div>
+        <div class="bh-sub">Push, Email, CMS, Analytics, Rôles</div>
+      </div>
+    </div>
+    <div class="bh-right">
+      <span class="bh-count">9 stories · 55 SP</span>
+      <span class="bh-chevron">▶</span>
+    </div>
+  </div>
+  <div class="backlog-body">
+    <div class="stories-grid">
+      <div class="story-card"><div class="sc-top"><span class="sc-id">US-032</span><span class="sc-points" style="color:var(--s5)">8 SP</span></div><div class="sc-title">Notifications Push Web (OneSignal)</div><div class="sc-desc">En tant qu'utilisateur, je veux recevoir des notifications push pour les rappels J-1, alertes ponts et badges débloqués.</div><div class="sc-footer"><span class="sc-tag">OneSignal</span><span class="sc-tag">Push</span><span class="sc-prio prio-critical">Critique</span></div></div>
+      <div class="story-card"><div class="sc-top"><span class="sc-id">US-033</span><span class="sc-points" style="color:var(--s5)">5 SP</span></div><div class="sc-title">Préférences de notifications utilisateur</div><div class="sc-desc">En tant qu'utilisateur, je veux choisir quels types de notifications je reçois et par quel canal (push / email).</div><div class="sc-footer"><span class="sc-tag">Settings</span><span class="sc-tag">UX</span><span class="sc-prio prio-high">Haute</span></div></div>
+      <div class="story-card"><div class="sc-top"><span class="sc-id">US-034</span><span class="sc-points" style="color:var(--s5)">8 SP</span></div><div class="sc-title">Edge Function — Rappels automatiques</div><div class="sc-desc">En tant que système, je veux qu'une Edge Function cron envoie automatiquement les rappels J-1 et J-7 chaque matin à 8h.</div><div class="sc-footer"><span class="sc-tag">Cron</span><span class="sc-tag">Edge Fn</span><span class="sc-prio prio-high">Haute</span></div></div>
+      <div class="story-card"><div class="sc-top"><span class="sc-id">US-035</span><span class="sc-points" style="color:var(--s5)">13 SP</span></div><div class="sc-title">Interface Admin — CMS Calendrier</div><div class="sc-desc">En tant qu'admin/éditeur, je veux créer, modifier et supprimer des jours fériés depuis un CMS en moins de 2 minutes.</div><div class="sc-footer"><span class="sc-tag">Admin</span><span class="sc-tag">CMS</span><span class="sc-prio prio-critical">Critique</span></div></div>
+      <div class="story-card"><div class="sc-top"><span class="sc-id">US-036</span><span class="sc-points" style="color:var(--s5)">5 SP</span></div><div class="sc-title">Gestion des rôles utilisateurs</div><div class="sc-desc">En tant qu'admin, je veux attribuer les rôles (user / editor / moderator / admin) à n'importe quel utilisateur depuis l'interface.</div><div class="sc-footer"><span class="sc-tag">RBAC</span><span class="sc-tag">Sécurité</span><span class="sc-prio prio-high">Haute</span></div></div>
+      <div class="story-card"><div class="sc-top"><span class="sc-id">US-037</span><span class="sc-points" style="color:var(--s8)">3 SP</span></div><div class="sc-title">Journal d'audit des actions admin</div><div class="sc-desc">En tant qu'admin, je veux voir le journal complet de toutes les actions effectuées sur la plateforme (qui, quoi, quand).</div><div class="sc-footer"><span class="sc-tag">Audit</span><span class="sc-tag">Logs</span><span class="sc-prio prio-medium">Moyenne</span></div></div>
+      <div class="story-card"><div class="sc-top"><span class="sc-id">US-038</span><span class="sc-points" style="color:var(--s8)">5 SP</span></div><div class="sc-title">Tableau de bord Analytics Admin</div><div class="sc-desc">En tant qu'admin, je veux voir les KPIs clés : utilisateurs actifs, soumissions en attente, taux quiz, dates les plus consultées.</div><div class="sc-footer"><span class="sc-tag">Analytics</span><span class="sc-tag">Dashboard</span><span class="sc-prio prio-medium">Moyenne</span></div></div>
+      <div class="story-card"><div class="sc-top"><span class="sc-id">US-039</span><span class="sc-points" style="color:var(--s8)">5 SP</span></div><div class="sc-title">Éditeur de notifications (Admin)</div><div class="sc-desc">En tant qu'admin, je veux rédiger et envoyer des notifications ciblées ou broadcast depuis l'interface d'administration.</div><div class="sc-footer"><span class="sc-tag">Admin</span><span class="sc-tag">Notifs</span><span class="sc-prio prio-medium">Moyenne</span></div></div>
+      <div class="story-card"><div class="sc-top"><span class="sc-id">US-040</span><span class="sc-points" style="color:var(--s8)">3 SP</span></div><div class="sc-title">Backup & Export données</div><div class="sc-desc">En tant qu'admin, je veux exporter les données utilisateurs et la configuration complète du calendrier en un clic.</div><div class="sc-footer"><span class="sc-tag">Backup</span><span class="sc-tag">Export</span><span class="sc-prio prio-low">Basse</span></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ÉPIC 6 -->
+<div class="backlog-section">
+  <div class="backlog-header" onclick="toggleBacklog(this)">
+    <div class="bh-left">
+      <div class="bh-icon" style="background:rgba(16,185,129,.15)">🚀</div>
+      <div>
+        <div class="bh-title">Épic 6 — Croissance & Lancement</div>
+        <div class="bh-sub">SEO, viralité, QA, performance, mise en prod</div>
+      </div>
+    </div>
+    <div class="bh-right">
+      <span class="bh-count">8 stories · 47 SP</span>
+      <span class="bh-chevron">▶</span>
+    </div>
+  </div>
+  <div class="backlog-body">
+    <div class="stories-grid">
+      <div class="story-card"><div class="sc-top"><span class="sc-id">US-041</span><span class="sc-points" style="color:var(--s8)">8 SP</span></div><div class="sc-title">SEO & pages de destination optimisées</div><div class="sc-desc">En tant que visiteur Google, je veux trouver le site en tapant « jours fériés Gabon 2025 » ou « 30 août Gabon signification ».</div><div class="sc-footer"><span class="sc-tag">SEO</span><span class="sc-tag">Next.js</span><span class="sc-prio prio-high">Haute</span></div></div>
+      <div class="story-card"><div class="sc-top"><span class="sc-id">US-042</span><span class="sc-points" style="color:var(--s8)">5 SP</span></div><div class="sc-title">Mécanique Share-to-Unlock (WhatsApp)</div><div class="sc-desc">En tant qu'utilisateur, je veux débloquer un badge rare ou du contenu exclusif en partageant un lien d'invitation WhatsApp.</div><div class="sc-footer"><span class="sc-tag">Viral</span><span class="sc-tag">WhatsApp</span><span class="sc-prio prio-high">Haute</span></div></div>
+      <div class="story-card"><div class="sc-top"><span class="sc-id">US-043</span><span class="sc-points" style="color:var(--s8)">3 SP</span></div><div class="sc-title">QR Code générateur</div><div class="sc-desc">En tant qu'admin, je veux générer des QR codes pointant vers la plateforme pour les afficher dans des lieux physiques.</div><div class="sc-footer"><span class="sc-tag">QR</span><span class="sc-tag">Phygital</span><span class="sc-prio prio-medium">Moyenne</span></div></div>
+      <div class="story-card"><div class="sc-top"><span class="sc-id">US-044</span><span class="sc-points" style="color:var(--s9)">8 SP</span></div><div class="sc-title">Tests end-to-end (Playwright)</div><div class="sc-desc">En tant que dev, je veux des tests E2E automatisés couvrant les parcours critiques : auth, soumission, quiz, export iCal.</div><div class="sc-footer"><span class="sc-tag">QA</span><span class="sc-tag">Playwright</span><span class="sc-prio prio-critical">Critique</span></div></div>
+      <div class="story-card"><div class="sc-top"><span class="sc-id">US-045</span><span class="sc-points" style="color:var(--s9)">5 SP</span></div><div class="sc-title">Optimisation performance (Lighthouse ≥ 85)</span><span class="sc-prio prio-critical">Critique</span></div><div class="sc-desc">En tant qu'utilisateur mobile 3G, je veux que la page se charge en moins de 2 secondes.</div><div class="sc-footer"><span class="sc-tag">Perf</span><span class="sc-tag">LCP</span></div></div>
+      <div class="story-card"><div class="sc-top"><span class="sc-id">US-046</span><span class="sc-points" style="color:var(--s9)">5 SP</span></div><div class="sc-title">Monitoring Sentry + alertes</div><div class="sc-desc">En tant que dev, je veux être alerté automatiquement par Sentry en cas d'erreur critique en production.</div><div class="sc-footer"><span class="sc-tag">Monitoring</span><span class="sc-tag">Sentry</span><span class="sc-prio prio-high">Haute</span></div></div>
+      <div class="story-card"><div class="sc-top"><span class="sc-id">US-047</span><span class="sc-points" style="color:var(--s9)">8 SP</span></div><div class="sc-title">Documentation technique complète</div><div class="sc-desc">En tant que contributeur open source, je veux une documentation claire (README, CONTRIBUTING, API) pour commencer à contribuer en moins d'une heure.</div><div class="sc-footer"><span class="sc-tag">Docs</span><span class="sc-tag">OSS</span><span class="sc-prio prio-high">Haute</span></div></div>
+      <div class="story-card"><div class="sc-top"><span class="sc-id">US-048</span><span class="sc-points" style="color:var(--s9)">5 SP</span></div><div class="sc-title">Mise en production & DNS</div><div class="sc-desc">En tant qu'utilisateur gabonais, je veux accéder à la plateforme via gabon-feries.ga avec HTTPS et temps de réponse &lt; 1s depuis Libreville.</div><div class="sc-footer"><span class="sc-tag">Deploy</span><span class="sc-tag">Production</span><span class="sc-prio prio-critical">Critique</span></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ -->
+<!-- SPRINTS DÉTAILLÉS             -->
+<!-- ══════════════════════════════ -->
+<div class="section-hd">
+  <div class="section-hd-icon" style="background:rgba(0,184,122,.15)">⚡</div>
+  Sprints — Planification Détaillée
+</div>
+
+<!-- SPRINT 0 -->
+<div class="sprint-card">
+  <div class="sprint-header" style="border-left-color:var(--s0)" onclick="toggleSprint(this)">
+    <div class="sh-meta">
+      <div class="sh-sprint-label" style="color:var(--s0)">● Sprint 0</div>
+      <div class="sh-sprint-name">Setup & Configuration</div>
+      <div class="sh-dates"><span>Sem 1</span><span class="sh-dates-dot"></span><span>1 semaine</span></div>
+    </div>
+    <div class="sh-goal" style="border-left-color:var(--s0)">🎯 <strong>Sprint Goal :</strong> L'équipe dispose d'un environnement de développement 100% opérationnel. Le repo est configuré, Supabase initialisé et le premier deploy Vercel effectué.</div>
+    <div class="sh-right">
+      <div class="sh-pts" style="color:var(--s0)">16 SP</div>
+      <div class="sh-pts-label">Story Points</div>
+      <span class="sh-status status-done">✓ Terminé</span>
+    </div>
+  </div>
+  <div class="sprint-body">
+    <div class="sprint-body-inner">
+      <div class="stories-grid">
+        <div class="story-card" style="--c:var(--s0)"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--s0)"></div><div class="sc-top"><span class="sc-id">US-001</span><span class="sc-points" style="color:var(--s0)">3 SP</span></div><div class="sc-title">Setup repository & CI/CD</div><div class="sc-footer"><span class="sc-tag">DevOps</span><span class="sc-prio prio-critical">Critique</span></div></div>
+        <div class="story-card"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--s0)"></div><div class="sc-top"><span class="sc-id">US-002</span><span class="sc-points" style="color:var(--s0)">8 SP</span></div><div class="sc-title">Initialisation schéma Supabase</div><div class="sc-footer"><span class="sc-tag">BDD</span><span class="sc-prio prio-critical">Critique</span></div></div>
+        <div class="story-card"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--s0)"></div><div class="sc-top"><span class="sc-id">US-004</span><span class="sc-points" style="color:var(--s0)">5 SP</span></div><div class="sc-title">Design System & composants de base</div><div class="sc-footer"><span class="sc-tag">UI</span><span class="sc-prio prio-high">Haute</span></div></div>
+      </div>
+      <div class="dod-box">
+        <div class="dod-title">Definition of Done — Sprint 0</div>
+        <div class="dod-items">
+          <span class="dod-item">Repo GitHub public avec branch protection</span>
+          <span class="dod-item">GitHub Actions lint + test vert</span>
+          <span class="dod-item">Supabase project créé + migrations appliquées</span>
+          <span class="dod-item">Vercel deploy preview fonctionnel</span>
+          <span class="dod-item">Design tokens Tailwind documentés</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SPRINT 1 -->
+<div class="sprint-card">
+  <div class="sprint-header" style="border-left-color:var(--s1)" onclick="toggleSprint(this)">
+    <div class="sh-meta">
+      <div class="sh-sprint-label" style="color:var(--s1)">● Sprint 1</div>
+      <div class="sh-sprint-name">Authentification & Profil</div>
+      <div class="sh-dates"><span>Sem 2–3</span><span class="sh-dates-dot"></span><span>2 semaines</span></div>
+    </div>
+    <div class="sh-goal" style="border-left-color:var(--s1)">🎯 <strong>Sprint Goal :</strong> Un utilisateur peut s'inscrire, se connecter (email + Google), modifier son profil et accéder à son dashboard personnel.</div>
+    <div class="sh-right">
+      <div class="sh-pts" style="color:var(--s1)">26 SP</div>
+      <div class="sh-pts-label">Story Points</div>
+      <span class="sh-status status-active">⚡ Actif</span>
+    </div>
+  </div>
+  <div class="sprint-body">
+    <div class="sprint-body-inner">
+      <div class="stories-grid">
+        <div class="story-card"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--s1)"></div><div class="sc-top"><span class="sc-id">US-003</span><span class="sc-points" style="color:var(--s1)">8 SP</span></div><div class="sc-title">Authentification Email + Google OAuth</div><div class="sc-footer"><span class="sc-tag">Auth</span><span class="sc-prio prio-critical">Critique</span></div></div>
+        <div class="story-card"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--s1)"></div><div class="sc-top"><span class="sc-id">US-005</span><span class="sc-points" style="color:var(--s1)">13 SP</span></div><div class="sc-title">Profil utilisateur complet</div><div class="sc-footer"><span class="sc-tag">Profil</span><span class="sc-prio prio-high">Haute</span></div></div>
+        <div class="story-card"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--s1)"></div><div class="sc-top"><span class="sc-id">US-006</span><span class="sc-points" style="color:var(--s1)">5 SP</span></div><div class="sc-title">PWA & manifest mobile</div><div class="sc-footer"><span class="sc-tag">PWA</span><span class="sc-prio prio-medium">Moyenne</span></div></div>
+      </div>
+      <div class="dod-box">
+        <div class="dod-title">Definition of Done — Sprint 1</div>
+        <div class="dod-items">
+          <span class="dod-item">Inscription email fonctionnelle</span>
+          <span class="dod-item">Google OAuth intégré</span>
+          <span class="dod-item">Dashboard profil accessible</span>
+          <span class="dod-item">Trigger sync auth.users → profiles</span>
+          <span class="dod-item">PWA installable sur Android/iOS</span>
+          <span class="dod-item">Tests auth E2E passants</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SPRINT 2 -->
+<div class="sprint-card">
+  <div class="sprint-header" style="border-left-color:var(--s2)" onclick="toggleSprint(this)">
+    <div class="sh-meta">
+      <div class="sh-sprint-label" style="color:var(--s2)">● Sprint 2</div>
+      <div class="sh-sprint-name">Calendrier Public (Core)</div>
+      <div class="sh-dates"><span>Sem 4–5</span><span class="sh-dates-dot"></span><span>2 semaines</span></div>
+    </div>
+    <div class="sh-goal" style="border-left-color:var(--s2)">🎯 <strong>Sprint Goal :</strong> N'importe quel visiteur peut consulter le calendrier complet des jours fériés avec code couleur, fiches détaillées et cases Mystère.</div>
+    <div class="sh-right">
+      <div class="sh-pts" style="color:var(--s2)">34 SP</div>
+      <div class="sh-pts-label">Story Points</div>
+      <span class="sh-status status-next">○ Planifié</span>
+    </div>
+  </div>
+  <div class="sprint-body">
+    <div class="sprint-body-inner">
+      <div class="stories-grid">
+        <div class="story-card"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--s2)"></div><div class="sc-top"><span class="sc-id">US-007</span><span class="sc-points" style="color:var(--s2)">13 SP</span></div><div class="sc-title">Vue calendrier mensuelle & annuelle</div><div class="sc-footer"><span class="sc-tag">Calendrier</span><span class="sc-prio prio-critical">Critique</span></div></div>
+        <div class="story-card"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--s2)"></div><div class="sc-top"><span class="sc-id">US-008</span><span class="sc-points" style="color:var(--s2)">8 SP</span></div><div class="sc-title">Fiche détaillée par jour férié</div><div class="sc-footer"><span class="sc-tag">Fiches</span><span class="sc-prio prio-critical">Critique</span></div></div>
+        <div class="story-card"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--s2)"></div><div class="sc-top"><span class="sc-id">US-009</span><span class="sc-points" style="color:var(--s2)">5 SP</span></div><div class="sc-title">Cases Mystère (unlock le jour J)</div><div class="sc-footer"><span class="sc-tag">UX</span><span class="sc-prio prio-high">Haute</span></div></div>
+        <div class="story-card"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--s2)"></div><div class="sc-top"><span class="sc-id">US-010</span><span class="sc-points" style="color:var(--s2)">8 SP</span></div><div class="sc-title">Feux d'artifice (fêtes nationales)</div><div class="sc-footer"><span class="sc-tag">Animation</span><span class="sc-prio prio-medium">Moyenne</span></div></div>
+      </div>
+      <div class="dod-box">
+        <div class="dod-title">Definition of Done — Sprint 2</div>
+        <div class="dod-items">
+          <span class="dod-item">Calendrier annuel responsive</span>
+          <span class="dod-item">15 jours fériés seeded en BDD</span>
+          <span class="dod-item">Fiches avec galerie photo</span>
+          <span class="dod-item">Animation feux d'artifice validée</span>
+          <span class="dod-item">Realtime: mise à jour &lt; 500ms</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SPRINT 3 -->
+<div class="sprint-card">
+  <div class="sprint-header" style="border-left-color:var(--s3)" onclick="toggleSprint(this)">
+    <div class="sh-meta">
+      <div class="sh-sprint-label" style="color:var(--s3)">● Sprint 3</div>
+      <div class="sh-sprint-name">Export, Ponts & Fêtes Mobiles</div>
+      <div class="sh-dates"><span>Sem 6–7</span><span class="sh-dates-dot"></span><span>2 semaines</span></div>
+    </div>
+    <div class="sh-goal" style="border-left-color:var(--s3)">🎯 <strong>Sprint Goal :</strong> L'utilisateur peut synchroniser les jours fériés avec son calendrier personnel et être alerté des ponts potentiels.</div>
+    <div class="sh-right">
+      <div class="sh-pts" style="color:var(--s3)">26 SP</div>
+      <div class="sh-pts-label">Story Points</div>
+      <span class="sh-status status-next">○ Planifié</span>
+    </div>
+  </div>
+  <div class="sprint-body">
+    <div class="sprint-body-inner">
+      <div class="stories-grid">
+        <div class="story-card"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--s3)"></div><div class="sc-top"><span class="sc-id">US-011</span><span class="sc-points" style="color:var(--s3)">8 SP</span></div><div class="sc-title">Export iCal / Google Calendar</div><div class="sc-footer"><span class="sc-tag">Export</span><span class="sc-prio prio-high">Haute</span></div></div>
+        <div class="story-card"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--s3)"></div><div class="sc-top"><span class="sc-id">US-012</span><span class="sc-points" style="color:var(--s3)">5 SP</span></div><div class="sc-title">Widget compte à rebours partageable</div><div class="sc-footer"><span class="sc-tag">Viral</span><span class="sc-prio prio-medium">Moyenne</span></div></div>
+        <div class="story-card"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--s3)"></div><div class="sc-top"><span class="sc-id">US-013</span><span class="sc-points" style="color:var(--s3)">8 SP</span></div><div class="sc-title">Calcul automatique fêtes mobiles</div><div class="sc-footer"><span class="sc-tag">Algo</span><span class="sc-prio prio-high">Haute</span></div></div>
+        <div class="story-card"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--s3)"></div><div class="sc-top"><span class="sc-id">US-014</span><span class="sc-points" style="color:var(--s3)">5 SP</span></div><div class="sc-title">Détection & alerte « Pont »</div><div class="sc-footer"><span class="sc-tag">Logique</span><span class="sc-prio prio-high">Haute</span></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SPRINT 4 -->
+<div class="sprint-card">
+  <div class="sprint-header" style="border-left-color:var(--s4)" onclick="toggleSprint(this)">
+    <div class="sh-meta">
+      <div class="sh-sprint-label" style="color:var(--s4)">● Sprint 4</div>
+      <div class="sh-sprint-name">Soumission Citoyenne</div>
+      <div class="sh-dates"><span>Sem 8–9</span><span class="sh-dates-dot"></span><span>2 semaines</span></div>
+    </div>
+    <div class="sh-goal" style="border-left-color:var(--s4)">🎯 <strong>Sprint Goal :</strong> Un citoyen peut proposer une nouvelle date avec source officielle, et un admin peut approuver ou rejeter la soumission en temps réel.</div>
+    <div class="sh-right">
+      <div class="sh-pts" style="color:var(--s4)">29 SP</div>
+      <div class="sh-pts-label">Story Points</div>
+      <span class="sh-status status-next">○ Planifié</span>
+    </div>
+  </div>
+  <div class="sprint-body">
+    <div class="sprint-body-inner">
+      <div class="stories-grid">
+        <div class="story-card"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--s4)"></div><div class="sc-top"><span class="sc-id">US-015</span><span class="sc-points" style="color:var(--s4)">8 SP</span></div><div class="sc-title">Formulaire de soumission</div><div class="sc-footer"><span class="sc-tag">Form</span><span class="sc-prio prio-critical">Critique</span></div></div>
+        <div class="story-card"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--s4)"></div><div class="sc-top"><span class="sc-id">US-016</span><span class="sc-points" style="color:var(--s4)">5 SP</span></div><div class="sc-title">Rate limiting anti-spam</div><div class="sc-footer"><span class="sc-tag">Sécurité</span><span class="sc-prio prio-high">Haute</span></div></div>
+        <div class="story-card"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--s4)"></div><div class="sc-top"><span class="sc-id">US-017</span><span class="sc-points" style="color:var(--s4)">8 SP</span></div><div class="sc-title">File de validation Admin (Realtime)</div><div class="sc-footer"><span class="sc-tag">Admin</span><span class="sc-prio prio-critical">Critique</span></div></div>
+        <div class="story-card"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--s4)"></div><div class="sc-top"><span class="sc-id">US-018</span><span class="sc-points" style="color:var(--s4)">8 SP</span></div><div class="sc-title">Approbation / Rejet avec commentaire</div><div class="sc-footer"><span class="sc-tag">Workflow</span><span class="sc-prio prio-critical">Critique</span></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SPRINT 5 -->
+<div class="sprint-card">
+  <div class="sprint-header" style="border-left-color:var(--s5)" onclick="toggleSprint(this)">
+    <div class="sh-meta">
+      <div class="sh-sprint-label" style="color:var(--s5)">● Sprint 5</div>
+      <div class="sh-sprint-name">Admin CMS & Notifications</div>
+      <div class="sh-dates"><span>Sem 10–11</span><span class="sh-dates-dot"></span><span>2 semaines</span></div>
+    </div>
+    <div class="sh-goal" style="border-left-color:var(--s5)">🎯 <strong>Sprint Goal :</strong> L'admin peut piloter l'intégralité de la plateforme depuis un CMS. Les notifications email et push sont opérationnelles.</div>
+    <div class="sh-right">
+      <div class="sh-pts" style="color:var(--s5)">42 SP</div>
+      <div class="sh-pts-label">Story Points</div>
+      <span class="sh-status status-next">○ Planifié</span>
+    </div>
+  </div>
+  <div class="sprint-body">
+    <div class="sprint-body-inner">
+      <div class="stories-grid">
+        <div class="story-card"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--s5)"></div><div class="sc-top"><span class="sc-id">US-019</span><span class="sc-points" style="color:var(--s5)">8 SP</span></div><div class="sc-title">Notification email utilisateur</div><div class="sc-footer"><span class="sc-tag">Resend</span><span class="sc-prio prio-high">Haute</span></div></div>
+        <div class="story-card"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--s5)"></div><div class="sc-top"><span class="sc-id">US-020</span><span class="sc-points" style="color:var(--s5)">8 SP</span></div><div class="sc-title">Historique soumissions utilisateur</div><div class="sc-footer"><span class="sc-tag">Dashboard</span><span class="sc-prio prio-medium">Moyenne</span></div></div>
+        <div class="story-card"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--s5)"></div><div class="sc-top"><span class="sc-id">US-021</span><span class="sc-points" style="color:var(--s5)">8 SP</span></div><div class="sc-title">Validation URL source (Edge Fn)</div><div class="sc-footer"><span class="sc-tag">Edge Fn</span><span class="sc-prio prio-high">Haute</span></div></div>
+        <div class="story-card"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--s5)"></div><div class="sc-top"><span class="sc-id">US-032</span><span class="sc-points" style="color:var(--s5)">8 SP</span></div><div class="sc-title">Notifications Push Web (OneSignal)</div><div class="sc-footer"><span class="sc-tag">Push</span><span class="sc-prio prio-critical">Critique</span></div></div>
+        <div class="story-card"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--s5)"></div><div class="sc-top"><span class="sc-id">US-033</span><span class="sc-points" style="color:var(--s5)">5 SP</span></div><div class="sc-title">Préférences notifications utilisateur</div><div class="sc-footer"><span class="sc-tag">Settings</span><span class="sc-prio prio-high">Haute</span></div></div>
+        <div class="story-card"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--s5)"></div><div class="sc-top"><span class="sc-id">US-035</span><span class="sc-points" style="color:var(--s5)">13 SP</span></div><div class="sc-title">Interface Admin — CMS Calendrier</div><div class="sc-footer"><span class="sc-tag">CMS</span><span class="sc-prio prio-critical">Critique</span></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SPRINT 6 -->
+<div class="sprint-card">
+  <div class="sprint-header" style="border-left-color:var(--s6)" onclick="toggleSprint(this)">
+    <div class="sh-meta">
+      <div class="sh-sprint-label" style="color:var(--s6)">● Sprint 6</div>
+      <div class="sh-sprint-name">Gamification — Points & Badges</div>
+      <div class="sh-dates"><span>Sem 12–13</span><span class="sh-dates-dot"></span><span>2 semaines</span></div>
+    </div>
+    <div class="sh-goal" style="border-left-color:var(--s6)">🎯 <strong>Sprint Goal :</strong> Le système de points et de badges est pleinement fonctionnel. Un utilisateur peut progresser et voir sa Barre de Patriotisme se remplir.</div>
+    <div class="sh-right">
+      <div class="sh-pts" style="color:var(--s6)">34 SP</div>
+      <div class="sh-pts-label">Story Points</div>
+      <span class="sh-status status-next">○ Planifié</span>
+    </div>
+  </div>
+  <div class="sprint-body">
+    <div class="sprint-body-inner">
+      <div class="stories-grid">
+        <div class="story-card"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--s6)"></div><div class="sc-top"><span class="sc-id">US-022</span><span class="sc-points" style="color:var(--s6)">8 SP</span></div><div class="sc-title">Système de points & transactions</div><div class="sc-footer"><span class="sc-tag">Points</span><span class="sc-prio prio-critical">Critique</span></div></div>
+        <div class="story-card"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--s6)"></div><div class="sc-top"><span class="sc-id">US-023</span><span class="sc-points" style="color:var(--s6)">5 SP</span></div><div class="sc-title">Barre de Patriotisme</div><div class="sc-footer"><span class="sc-tag">Animation</span><span class="sc-prio prio-high">Haute</span></div></div>
+        <div class="story-card"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--s6)"></div><div class="sc-top"><span class="sc-id">US-025</span><span class="sc-points" style="color:var(--s6)">5 SP</span></div><div class="sc-title">Débloquage automatique de badges</div><div class="sc-footer"><span class="sc-tag">Trigger</span><span class="sc-prio prio-critical">Critique</span></div></div>
+        <div class="story-card"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--s6)"></div><div class="sc-top"><span class="sc-id">US-026</span><span class="sc-points" style="color:var(--s6)">8 SP</span></div><div class="sc-title">Galerie de badges sur le profil</div><div class="sc-footer"><span class="sc-tag">UI</span><span class="sc-prio prio-high">Haute</span></div></div>
+        <div class="story-card"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--s6)"></div><div class="sc-top"><span class="sc-id">US-028</span><span class="sc-points" style="color:var(--s6)">5 SP</span></div><div class="sc-title">Série de connexion mensuelle</div><div class="sc-footer"><span class="sc-tag">Streak</span><span class="sc-prio prio-medium">Moyenne</span></div></div>
+        <div class="story-card"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--s6)"></div><div class="sc-top"><span class="sc-id">US-034</span><span class="sc-points" style="color:var(--s6)">8 SP</span></div><div class="sc-title">Edge Function rappels automatiques</div><div class="sc-footer"><span class="sc-tag">Cron</span><span class="sc-prio prio-high">Haute</span></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SPRINT 7 -->
+<div class="sprint-card">
+  <div class="sprint-header" style="border-left-color:var(--s7)" onclick="toggleSprint(this)">
+    <div class="sh-meta">
+      <div class="sh-sprint-label" style="color:var(--s7)">● Sprint 7</div>
+      <div class="sh-sprint-name">Quiz, Leaderboard & Admin Complet</div>
+      <div class="sh-dates"><span>Sem 14–15</span><span class="sh-dates-dot"></span><span>2 semaines</span></div>
+    </div>
+    <div class="sh-goal" style="border-left-color:var(--s7)">🎯 <strong>Sprint Goal :</strong> Les quiz sont jouables et le leaderboard actif. L'admin dispose de l'interface complète de gestion (rôles, analytics, notifications, audit).</div>
+    <div class="sh-right">
+      <div class="sh-pts" style="color:var(--s7)">47 SP</div>
+      <div class="sh-pts-label">Story Points</div>
+      <span class="sh-status status-next">○ Planifié</span>
+    </div>
+  </div>
+  <div class="sprint-body">
+    <div class="sprint-body-inner">
+      <div class="stories-grid">
+        <div class="story-card"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--s7)"></div><div class="sc-top"><span class="sc-id">US-024</span><span class="sc-points" style="color:var(--s7)">8 SP</span></div><div class="sc-title">Quiz interactifs par jour férié</div><div class="sc-footer"><span class="sc-tag">Quiz</span><span class="sc-prio prio-critical">Critique</span></div></div>
+        <div class="story-card"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--s7)"></div><div class="sc-top"><span class="sc-id">US-027</span><span class="sc-points" style="color:var(--s7)">8 SP</span></div><div class="sc-title">Classement mensuel (Leaderboard)</div><div class="sc-footer"><span class="sc-tag">Social</span><span class="sc-prio prio-high">Haute</span></div></div>
+        <div class="story-card"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--s7)"></div><div class="sc-top"><span class="sc-id">US-029</span><span class="sc-points" style="color:var(--s7)">3 SP</span></div><div class="sc-title">Avatars personnalisables</div><div class="sc-footer"><span class="sc-tag">Cosmétique</span><span class="sc-prio prio-low">Basse</span></div></div>
+        <div class="story-card"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--s7)"></div><div class="sc-top"><span class="sc-id">US-030</span><span class="sc-points" style="color:var(--s7)">5 SP</span></div><div class="sc-title">Banque de questions (Admin)</div><div class="sc-footer"><span class="sc-tag">Admin</span><span class="sc-prio prio-high">Haute</span></div></div>
+        <div class="story-card"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--s7)"></div><div class="sc-top"><span class="sc-id">US-036</span><span class="sc-points" style="color:var(--s7)">5 SP</span></div><div class="sc-title">Gestion des rôles utilisateurs</div><div class="sc-footer"><span class="sc-tag">RBAC</span><span class="sc-prio prio-high">Haute</span></div></div>
+        <div class="story-card"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--s7)"></div><div class="sc-top"><span class="sc-id">US-037</span><span class="sc-points" style="color:var(--s7)">3 SP</span></div><div class="sc-title">Journal d'audit admin</div><div class="sc-footer"><span class="sc-tag">Logs</span><span class="sc-prio prio-medium">Moyenne</span></div></div>
+        <div class="story-card"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--s7)"></div><div class="sc-top"><span class="sc-id">US-038</span><span class="sc-points" style="color:var(--s7)">5 SP</span></div><div class="sc-title">Tableau de bord Analytics</div><div class="sc-footer"><span class="sc-tag">Analytics</span><span class="sc-prio prio-medium">Moyenne</span></div></div>
+        <div class="story-card"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--s7)"></div><div class="sc-top"><span class="sc-id">US-039</span><span class="sc-points" style="color:var(--s7)">5 SP</span></div><div class="sc-title">Éditeur notifications (Admin)</div><div class="sc-footer"><span class="sc-tag">Admin</span><span class="sc-prio prio-medium">Moyenne</span></div></div>
+        <div class="story-card"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--s7)"></div><div class="sc-top"><span class="sc-id">US-040</span><span class="sc-points" style="color:var(--s7)">3 SP</span></div><div class="sc-title">Backup & Export données</div><div class="sc-footer"><span class="sc-tag">Backup</span><span class="sc-prio prio-low">Basse</span></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SPRINT 8 -->
+<div class="sprint-card">
+  <div class="sprint-header" style="border-left-color:var(--s8)" onclick="toggleSprint(this)">
+    <div class="sh-meta">
+      <div class="sh-sprint-label" style="color:var(--s8)">● Sprint 8</div>
+      <div class="sh-sprint-name">Growth & Optimisation</div>
+      <div class="sh-dates"><span>Sem 16–17</span><span class="sh-dates-dot"></span><span>2 semaines</span></div>
+    </div>
+    <div class="sh-goal" style="border-left-color:var(--s8)">🎯 <strong>Sprint Goal :</strong> La plateforme est optimisée pour la croissance organique : SEO, partage viral WhatsApp, QR codes, et tests E2E couvrant les parcours critiques.</div>
+    <div class="sh-right">
+      <div class="sh-pts" style="color:var(--s8)">24 SP</div>
+      <div class="sh-pts-label">Story Points</div>
+      <span class="sh-status status-next">○ Planifié</span>
+    </div>
+  </div>
+  <div class="sprint-body">
+    <div class="sprint-body-inner">
+      <div class="stories-grid">
+        <div class="story-card"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--s8)"></div><div class="sc-top"><span class="sc-id">US-031</span><span class="sc-points" style="color:var(--s8)">5 SP</span></div><div class="sc-title">Gestion badges (Admin)</div><div class="sc-footer"><span class="sc-tag">Admin</span><span class="sc-prio prio-medium">Moyenne</span></div></div>
+        <div class="story-card"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--s8)"></div><div class="sc-top"><span class="sc-id">US-041</span><span class="sc-points" style="color:var(--s8)">8 SP</span></div><div class="sc-title">SEO & pages de destination</div><div class="sc-footer"><span class="sc-tag">SEO</span><span class="sc-prio prio-high">Haute</span></div></div>
+        <div class="story-card"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--s8)"></div><div class="sc-top"><span class="sc-id">US-042</span><span class="sc-points" style="color:var(--s8)">5 SP</span></div><div class="sc-title">Share-to-Unlock (WhatsApp)</div><div class="sc-footer"><span class="sc-tag">Viral</span><span class="sc-prio prio-high">Haute</span></div></div>
+        <div class="story-card"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--s8)"></div><div class="sc-top"><span class="sc-id">US-043</span><span class="sc-points" style="color:var(--s8)">3 SP</span></div><div class="sc-title">Générateur QR Code</div><div class="sc-footer"><span class="sc-tag">Phygital</span><span class="sc-prio prio-medium">Moyenne</span></div></div>
+        <div class="story-card"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--s8)"></div><div class="sc-top"><span class="sc-id">US-044</span><span class="sc-points" style="color:var(--s8)">8 SP</span></div><div class="sc-title">Tests end-to-end (Playwright)</div><div class="sc-footer"><span class="sc-tag">QA</span><span class="sc-prio prio-critical">Critique</span></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SPRINT 9 (RELEASE) -->
+<div class="sprint-card" style="border-color:rgba(16,185,129,.3)">
+  <div class="sprint-header" style="border-left-color:var(--s9);background:linear-gradient(90deg, rgba(16,185,129,.05) 0%, transparent 100%)" onclick="toggleSprint(this)">
+    <div class="sh-meta">
+      <div class="sh-sprint-label" style="color:var(--s9)">🚀 Sprint 9 — RELEASE</div>
+      <div class="sh-sprint-name">Lancement en Production</div>
+      <div class="sh-dates"><span>Sem 18</span><span class="sh-dates-dot"></span><span>1 semaine</span></div>
+    </div>
+    <div class="sh-goal" style="border-left-color:var(--s9)">🎯 <strong>Sprint Goal :</strong> <strong>gabon-feries.ga est en production.</strong> Performances validées (Lighthouse ≥ 85), monitoring actif, documentation complète, annonce officielle publiée.</div>
+    <div class="sh-right">
+      <div class="sh-pts" style="color:var(--s9)">23 SP</div>
+      <div class="sh-pts-label">Story Points</div>
+      <span class="sh-status status-next">○ Planifié</span>
+    </div>
+  </div>
+  <div class="sprint-body">
+    <div class="sprint-body-inner">
+      <div class="stories-grid">
+        <div class="story-card" style="border-color:rgba(16,185,129,.2)"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--s9)"></div><div class="sc-top"><span class="sc-id">US-045</span><span class="sc-points" style="color:var(--s9)">5 SP</span></div><div class="sc-title">Optimisation perf (Lighthouse ≥ 85)</div><div class="sc-footer"><span class="sc-tag">Perf</span><span class="sc-prio prio-critical">Critique</span></div></div>
+        <div class="story-card" style="border-color:rgba(16,185,129,.2)"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--s9)"></div><div class="sc-top"><span class="sc-id">US-046</span><span class="sc-points" style="color:var(--s9)">5 SP</span></div><div class="sc-title">Monitoring Sentry + alertes</div><div class="sc-footer"><span class="sc-tag">Monitoring</span><span class="sc-prio prio-high">Haute</span></div></div>
+        <div class="story-card" style="border-color:rgba(16,185,129,.2)"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--s9)"></div><div class="sc-top"><span class="sc-id">US-047</span><span class="sc-points" style="color:var(--s9)">8 SP</span></div><div class="sc-title">Documentation technique complète</div><div class="sc-footer"><span class="sc-tag">Docs</span><span class="sc-prio prio-high">Haute</span></div></div>
+        <div class="story-card" style="border-color:rgba(16,185,129,.2)"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--s9)"></div><div class="sc-top"><span class="sc-id">US-048</span><span class="sc-points" style="color:var(--s9)">5 SP</span></div><div class="sc-title">Mise en production & DNS</div><div class="sc-footer"><span class="sc-tag">Deploy</span><span class="sc-prio prio-critical">Critique</span></div></div>
+      </div>
+      <div class="dod-box" style="border-color:rgba(16,185,129,.3);background:rgba(16,185,129,.05)">
+        <div class="dod-title">🚀 Release Checklist — Sprint 9</div>
+        <div class="dod-items">
+          <span class="dod-item">gabon-feries.ga opérationnel avec SSL</span>
+          <span class="dod-item">Lighthouse ≥ 85 sur mobile</span>
+          <span class="dod-item">Tous les tests E2E passants</span>
+          <span class="dod-item">Sentry configuré en production</span>
+          <span class="dod-item">Variables d'env production sécurisées</span>
+          <span class="dod-item">README et CONTRIBUTING complets</span>
+          <span class="dod-item">Annonce réseaux sociaux publiée 🇬🇦</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ -->
+<!-- VÉLOCITÉ                      -->
+<!-- ══════════════════════════════ -->
+<div class="velocity-section">
+  <div class="vs-title">Vélocité par Sprint</div>
+  <div class="vs-sub">Story Points planifiés · Vélocité cible : 32 SP / sprint (hors Sprint 0 et 9)</div>
+  <div class="velocity-chart">
+    <div class="vc-bar-wrap">
+      <div class="vc-pts">16</div>
+      <div class="vc-bar" style="background:var(--s0);height:40%"></div>
+      <div class="vc-label">SP0</div>
+    </div>
+    <div class="vc-bar-wrap">
+      <div class="vc-pts">26</div>
+      <div class="vc-bar" style="background:var(--s1);height:65%"></div>
+      <div class="vc-label">S1</div>
+    </div>
+    <div class="vc-bar-wrap">
+      <div class="vc-pts">34</div>
+      <div class="vc-bar" style="background:var(--s2);height:85%"></div>
+      <div class="vc-label">S2</div>
+    </div>
+    <div class="vc-bar-wrap">
+      <div class="vc-pts">26</div>
+      <div class="vc-bar" style="background:var(--s3);height:65%"></div>
+      <div class="vc-label">S3</div>
+    </div>
+    <div class="vc-bar-wrap">
+      <div class="vc-pts">29</div>
+      <div class="vc-bar" style="background:var(--s4);height:73%"></div>
+      <div class="vc-label">S4</div>
+    </div>
+    <div class="vc-bar-wrap">
+      <div class="vc-pts">42</div>
+      <div class="vc-bar" style="background:var(--s5);height:100%"></div>
+      <div class="vc-label">S5</div>
+    </div>
+    <div class="vc-bar-wrap">
+      <div class="vc-pts">34</div>
+      <div class="vc-bar" style="background:var(--s6);height:85%"></div>
+      <div class="vc-label">S6</div>
+    </div>
+    <div class="vc-bar-wrap">
+      <div class="vc-pts">47</div>
+      <div class="vc-bar" style="background:var(--s7);height:100%;background:linear-gradient(to top,var(--s7),#FF6B6B)"></div>
+      <div class="vc-label">S7 ⚠</div>
+    </div>
+    <div class="vc-bar-wrap">
+      <div class="vc-pts">24</div>
+      <div class="vc-bar" style="background:var(--s8);height:60%"></div>
+      <div class="vc-label">S8</div>
+    </div>
+    <div class="vc-bar-wrap">
+      <div class="vc-pts">23</div>
+      <div class="vc-bar" style="background:var(--s9);height:58%"></div>
+      <div class="vc-label">S9</div>
+    </div>
+  </div>
+  <p style="font-size:11px;color:var(--muted);margin-top:12px;font-family:var(--mono)">⚠ Sprint 7 (47 SP) est chargé — envisagez de reporter US-029 (Avatars, 3SP) et US-040 (Backup, 3SP) en Sprint 8 si la vélocité réelle est inférieure.</p>
+</div>
+
+<!-- ══════════════════════════════ -->
+<!-- CÉRÉMONIES SCRUM              -->
+<!-- ══════════════════════════════ -->
+<div class="section-hd" style="padding-top:20px">
+  <div class="section-hd-icon" style="background:rgba(245,196,0,.12)">🔄</div>
+  Cérémonies SCRUM
+</div>
+
+</div><!-- /main -->
+
+<div class="ceremonies-grid">
+  <div class="cer-card">
+    <div class="cer-icon">📋</div>
+    <div class="cer-name">Sprint Planning</div>
+    <div class="cer-duration">⏱ 2h / début de sprint</div>
+    <div class="cer-desc">Sélection des User Stories du Product Backlog, estimation en SP (suite de Fibonacci : 1, 2, 3, 5, 8, 13…), définition du Sprint Goal.</div>
+  </div>
+  <div class="cer-card">
+    <div class="cer-icon">☀️</div>
+    <div class="cer-name">Daily Standup</div>
+    <div class="cer-duration">⏱ 15 min / chaque jour</div>
+    <div class="cer-desc">Trois questions : Qu'ai-je fait hier ? Que vais-je faire aujourd'hui ? Y a-t-il des obstacles ? Mise à jour du Sprint Burndown.</div>
+  </div>
+  <div class="cer-card">
+    <div class="cer-icon">🔍</div>
+    <div class="cer-name">Sprint Review</div>
+    <div class="cer-duration">⏱ 1h / fin de sprint</div>
+    <div class="cer-desc">Démonstration des fonctionnalités développées. Validation avec les parties prenantes. Mise à jour du Product Backlog si nécessaire.</div>
+  </div>
+  <div class="cer-card">
+    <div class="cer-icon">🪞</div>
+    <div class="cer-name">Rétrospective</div>
+    <div class="cer-duration">⏱ 1h / fin de sprint</div>
+    <div class="cer-desc">Ce qui a bien fonctionné, ce qui doit s'améliorer, les actions à mettre en place pour le prochain sprint (Keep / Drop / Try).</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ -->
+<!-- RÔLES SCRUM                   -->
+<!-- ══════════════════════════════ -->
+<div class="section-hd" style="padding: 20px 40px 16px">
+  <div class="section-hd-icon" style="background:rgba(14,165,233,.12)">👥</div>
+  Rôles SCRUM
+</div>
+
+<div class="roles-grid">
+  <div class="role-card" style="border-top-color:var(--g)">
+    <div class="rc-avatar">🦅</div>
+    <div class="rc-role">Product Owner</div>
+    <div class="rc-name">Le Porteur du Projet</div>
+    <ul class="rc-resps">
+      <li>Définit et priorise le Product Backlog</li>
+      <li>Rédige les User Stories avec les critères d'acceptation</li>
+      <li>Valide les livrables à chaque Sprint Review</li>
+      <li>Représente les utilisateurs gabonais finaux</li>
+      <li>Prend les décisions fonctionnelles finales</li>
+    </ul>
+  </div>
+  <div class="role-card" style="border-top-color:var(--b)">
+    <div class="rc-avatar">🔧</div>
+    <div class="rc-role">Scrum Master</div>
+    <div class="rc-name">Le Facilitateur Agile</div>
+    <ul class="rc-resps">
+      <li>Anime toutes les cérémonies SCRUM</li>
+      <li>Supprime les obstacles (impediments)</li>
+      <li>Vérifie le respect du cadre SCRUM</li>
+      <li>Maintient à jour le Sprint Burndown</li>
+      <li>Protège l'équipe des interruptions extérieures</li>
+    </ul>
+  </div>
+  <div class="role-card" style="border-top-color:var(--y)">
+    <div class="rc-avatar">💻</div>
+    <div class="rc-role">Development Team</div>
+    <div class="rc-name">L'Équipe Technique</div>
+    <ul class="rc-resps">
+      <li>Développe les fonctionnalités acceptées</li>
+      <li>Estime les User Stories en Story Points</li>
+      <li>S'auto-organise pour livrer le Sprint Goal</li>
+      <li>Rédige les tests (unit + E2E)</li>
+      <li>Respecte la Definition of Done</li>
+    </ul>
+  </div>
+</div>
+
+<div class="main" style="padding-top:0">
+
+<!-- ══════════════════════════════ -->
+<!-- DEFINITION OF DONE GLOBALE   -->
+<!-- ══════════════════════════════ -->
+<div class="backlog-section" style="border-color:rgba(0,184,122,.25)">
+  <div class="backlog-header" onclick="toggleBacklog(this)" style="background:rgba(0,184,122,.04)">
+    <div class="bh-left">
+      <div class="bh-icon" style="background:rgba(0,184,122,.15)">✅</div>
+      <div>
+        <div class="bh-title">Definition of Done — Globale</div>
+        <div class="bh-sub">Critères à valider pour toute User Story avant de la marquer « Done »</div>
+      </div>
+    </div>
+    <div class="bh-right">
+      <span class="bh-chevron">▶</span>
+    </div>
+  </div>
+  <div class="backlog-body">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div>
+        <h4 style="font-family:var(--mono);font-size:10px;color:var(--g);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px">Code & Technique</h4>
+        <div class="dod-items" style="flex-direction:column;gap:6px">
+          <span class="dod-item">Code review approuvé par au moins 1 pair</span>
+          <span class="dod-item">Tests unitaires écrits et passants (coverage ≥ 80%)</span>
+          <span class="dod-item">Aucune régression détectée sur les tests E2E existants</span>
+          <span class="dod-item">TypeScript strict — aucune erreur TS</span>
+          <span class="dod-item">Lint ESLint passant sans warnings</span>
+          <span class="dod-item">Migrations BDD versionnées dans /supabase/migrations</span>
+          <span class="dod-item">RLS validée sur toutes les nouvelles tables</span>
+        </div>
+      </div>
+      <div>
+        <h4 style="font-family:var(--mono);font-size:10px;color:var(--s1);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px">Fonctionnel & UX</h4>
+        <div class="dod-items" style="flex-direction:column;gap:6px">
+          <span class="dod-item">Critères d'acceptation de la User Story vérifiés</span>
+          <span class="dod-item">Responsive testé sur mobile (≤ 375px) et desktop</span>
+          <span class="dod-item">Testé sur Chrome, Firefox, Safari, Samsung Internet</span>
+          <span class="dod-item">Temps de chargement &lt; 2s sur connexion 3G simulée</span>
+          <span class="dod-item">Deploy Vercel Preview fonctionnel sur la PR</span>
+          <span class="dod-item">Commentaires inline pour les logiques complexes</span>
+          <span class="dod-item">Aucune donnée sensible exposée dans les logs client</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<script>
+function toggleSprint(header) {
+  const body = header.nextElementSibling;
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+}
+
+function toggleBacklog(header) {
+  const body = header.nextElementSibling;
+  const chevron = header.querySelector('.bh-chevron');
+  body.classList.toggle('open');
+  chevron.classList.toggle('open', body.classList.contains('open'));
+}
+
+// Auto-open sprint 0 and 1
+document.querySelectorAll('.sprint-header')[0].click();
+document.querySelectorAll('.sprint-header')[1].click();
+</script>
+</body>
+</html>
